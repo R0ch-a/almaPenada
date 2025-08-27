@@ -29,8 +29,19 @@ public class VooService {
             "28/08/2025"
     );
 
-    private static final String ARQUIVO_PASSAGENS = "src/main/resources/dados/passagens.txt";
+    private final String arquivoPassagensPath;
 
+    // Construtor padrão (usado pela aplicação em produção)
+    public VooService() {
+        this.arquivoPassagensPath = "src/main/resources/dados/passagens.txt";
+    }
+
+    // Construtor para testes, permitindo a injeção do caminho do arquivo
+    public VooService(String arquivoPassagensPath) {
+        this.arquivoPassagensPath = arquivoPassagensPath;
+    }
+
+    // O restante dos métodos permanece o mesmo
     public List<Destino> getDestinos() {
         return destinosFixos;
     }
@@ -47,7 +58,7 @@ public class VooService {
     }
 
     public void salvarPassagem(Voo voo) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARQUIVO_PASSAGENS, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivoPassagensPath, true))) {
             voo.setCodigo(gerarCodigo());
             writer.write(voo.toString());
             writer.newLine();
@@ -59,7 +70,9 @@ public class VooService {
 
     public List<Voo> carregarPassagens() {
         List<Voo> passagens = new ArrayList<>();
-        File arquivo = new File(ARQUIVO_PASSAGENS);
+        File arquivo = new File(arquivoPassagensPath);
+
+        System.out.println("Tentando carregar do arquivo: " + arquivo.getAbsolutePath());
 
         if (!arquivo.exists()) {
             System.out.println("Arquivo de passagens não encontrado. Iniciando com lista vazia.");
@@ -69,7 +82,6 @@ public class VooService {
         try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
-                // Regex para extrair os valores da linha
                 Pattern padrao = Pattern.compile("Código: (.*?), Origem: (.*?), Destino: (.*?), Data: (.*?), Poltrona: (.*)");
                 Matcher matcher = padrao.matcher(linha);
                 
@@ -80,15 +92,13 @@ public class VooService {
                     String data = matcher.group(4);
                     String poltrona = matcher.group(5);
 
-                    // Aqui, não temos a informação da classe no toString, então não podemos reconstruir
-                    // O melhor a fazer é criar um Voo padrão e preencher os campos disponíveis.
-                    Voo voo = new VooEconomico(); // Assumimos a classe econômica como padrão
+                    Voo voo = new VooEconomico();
                     voo.setCodigo(codigo);
                     voo.setOrigem(origem);
                     voo.setDestino(new Destino(cidadeDestino, "", ""));
                     voo.setData(data);
                     voo.setPoltrona(poltrona);
-                    
+
                     passagens.add(voo);
                 }
             }
