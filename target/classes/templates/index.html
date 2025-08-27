@@ -85,5 +85,18 @@
             </form>
         </div>
     </div>
+    
+    <div class="carteira">
+        <h2>Minhas Passagens</h2>
+        <div th:if="${#lists.isEmpty(passagensEmitidas)}" class="carteira-vazia">
+            Nenhuma passagem emitida ainda.
+        </div>
+        <div th:if="${not #lists.isEmpty(passagensEmitidas)}" class="lista-passagens">
+            <div class="passagem" th:each="passagem : ${passagensEmitidas}">
+                <p th:text="${passagem.toString()}"></p>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>

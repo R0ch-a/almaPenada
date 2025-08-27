@@ -1,0 +1,4 @@
+Aracaju;Rio de Janeiro;16/08/2025;Econômica;A3;500,00
+Aracaju;Recife;28/08/2025;Econômica;B6;500,00
+Código: 4A63, Origem: Aracaju, Destino: Curitiba, Data: 20/08/2025, Poltrona: A6
+Código: 4B78, Origem: Aracaju, Destino: Rio de Janeiro, Data: 16/08/2025, Poltrona: D5

@@ -1,6 +1,6 @@
 package com.voo.airlines.controller;
 
-import com.voo.airlines.model.Voo;
+import com.voo.airlines.model.*;
 import com.voo.airlines.service.VooService;
 import com.voo.airlines.model.VooEconomico;
 import com.voo.airlines.model.VooExecutivo;
@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+
+import java.util.List;
 
 @Controller
 @SessionAttributes("voo")
@@ -22,13 +24,15 @@ public class VooController {
 
     @ModelAttribute("voo")
     public Voo setupVoo() {
-        return new VooEconomico(); // Começa com um objeto padrão para a sessão
+        return new VooEconomico();
     }
 
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("destinos", vooService.getDestinos());
         model.addAttribute("datas", vooService.getDatas());
+        List<Voo> passagensEmitidas = vooService.carregarPassagens();
+        model.addAttribute("passagensEmitidas", passagensEmitidas);
         return "index";
     }
 
@@ -55,7 +59,6 @@ public class VooController {
             novoVoo = new VooEconomico();
         }
 
-        // Copia os dados existentes para a nova instância
         if (vooAtual != null) {
             novoVoo.setOrigem(vooAtual.getOrigem());
             novoVoo.setDestino(vooAtual.getDestino());
@@ -77,6 +80,7 @@ public class VooController {
     public String emitirPassagem(@ModelAttribute Voo voo, Model model, SessionStatus sessionStatus) {
         voo.setOrigem("Aracaju");
         voo.setHorario("08:00");
+        vooService.salvarPassagem(voo); // Salva a passagem antes de redirecionar
         model.addAttribute("voo", voo);
         sessionStatus.setComplete();
         return "passagem-confirmacao";
