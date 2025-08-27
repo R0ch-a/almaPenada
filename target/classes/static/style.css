@@ -1,0 +1,227 @@
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --bg-light: #f8f9fa;
+  --bg-white: #ffffff;
+  --border-color: #e9ecef;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --font-family: 'Poppins', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--bg-light);
+  color: #333;
+}
+
+header {
+  position: relative;
+  background-color: var(--bg-light);
+  padding: 30px 0;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+header img.aviao {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 70px;
+}
+
+header img.nuvens {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 90px;
+}
+
+.container-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 25px;
+  margin: 30px auto;
+  max-width: 950px;
+  background-color: var(--bg-white);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.grupo {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.botao {
+  position: relative;
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 15px 25px;
+  cursor: pointer;
+  min-width: 150px;
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+  transition: all 0.3s ease;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+.botao strong {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin-top: 5px;
+}
+
+.botao:hover {
+  background-color: var(--bg-light);
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+}
+
+.botao .triangulo {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--secondary-color);
+  transition: transform 0.3s ease;
+}
+
+/* Estado de ativo/dropdown aberto */
+.botao.active .triangulo {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Botão redondo final */
+.botao-redondo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 1rem;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.botao-redondo:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.botao-redondo img {
+  width: 40px;
+  height: 40px;
+}
+
+/* Dropdown padrão */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  z-index: 10;
+  min-width: 100%;
+  text-align: left;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+.dropdown-content div {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-content div:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.dropdown-content div:last-child {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.dropdown-content div:hover {
+  background-color: var(--bg-light);
+}
+
+/* Submenu Poltrona */
+.submenu {
+  position: relative;
+}
+
+.submenu .sub-dropdown {
+  display: none;
+  position: absolute;
+  top: -1px; /* Alinha com o item pai */
+  left: calc(100% + 5px); /* Espaço entre o menu e o submenu */
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  z-index: 20;
+  padding: 8px;
+  min-width: 150px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.submenu:hover .sub-dropdown {
+  display: grid;
+}
+
+.submenu .sub-dropdown div {
+  padding: 8px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.submenu .sub-dropdown div:hover {
+  background-color: var(--bg-light);
+}

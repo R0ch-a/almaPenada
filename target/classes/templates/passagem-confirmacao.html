@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmação da Passagem</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+        .container-confirmacao {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        .info-passagem p {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: #333;
+        }
+        .imagem-sucesso {
+            width: 150px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .botao-voltar {
+            margin-top: 30px;
+            padding: 12px 25px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .botao-voltar:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-confirmacao">
+        <h1 class="titulo">Passagem Registrada com Sucesso!</h1>
+        <img th:src="@{/images/sucesso.png}" alt="Ícone de sucesso" class="imagem-sucesso">
+
+        <div class="info-passagem">
+            <p><strong>Origem:</strong> <span th:text="${voo.origem}"></span></p>
+            <p><strong>Destino:</strong> <span th:text="${voo.destino}"></span></p>
+            <p><strong>Data:</strong> <span th:text="${voo.data}"></span></p>
+            <p><strong>Classe:</strong> <span th:text="${voo.classe}"></span></p>
+            <p><strong>Poltrona:</strong> <span th:text="${voo.poltrona}"></span></p>
+            <p><strong>Preço:</strong> <span th:text="${#numbers.formatCurrency(voo.preco)}"></span></p>
+        </div>
+
+        <a href="/" class="botao-voltar">Voltar para a Página Inicial</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+com\voo\airlines\model\Destino.class
+com\voo\airlines\VooApplication.class
+com\voo\airlines\controller\VooController.class
+com\voo\airlines\model\Voo.class
+com\voo\airlines\service\VooService.class

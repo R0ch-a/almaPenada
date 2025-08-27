@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vOO - Trancy</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <header>
+        <img th:src="@{/images/aviao.png}" class="aviao" alt="Avião">
+        Trancy Airlines
+        <img th:src="@{/images/nuvem.png}" class="nuvens" alt="Nuvens">
+    </header>
+
+    <div class="container-botoes">
+        <div class="grupo">
+            <div class="botao">
+                <div>Origem</div>
+                <div><strong>Aracaju</strong></div>
+            </div>
+            
+            <form th:action="@{/selecionarDestino}" method="post">
+                <div class="botao" id="botao-destino">
+                    <div>Destino</div>
+                    <select class="dropdown-content" name="siglaDestino" onchange="this.form.submit()">
+                        <option value="">Selecione...</option>
+                        <option th:each="destino : ${destinos}"
+                                th:value="${destino.sigla}"
+                                th:text="${destino.sigla}"
+                                th:selected="${voo.destino != null and voo.destino.sigla == destino.sigla}">
+                        </option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <div class="grupo">
+            <form th:action="@{/selecionarData}" method="post">
+                <div class="botao" id="botao-data">
+                    <div>Data</div>
+                    <select class="dropdown-content" name="data" onchange="this.form.submit()">
+                        <option value="">Selecione...</option>
+                        <option th:each="data : ${datas}"
+                                th:value="${data}"
+                                th:text="${data}"
+                                th:selected="${voo.data == data}">
+                        </option>
+                    </select>
+                </div>
+            </form>
+
+            <form th:action="@{/selecionarClasse}" method="post">
+                <div class="botao" id="botao-classe">
+                    <div>Classe</div>
+                    <select class="dropdown-content" name="classe" onchange="this.form.submit()">
+                        <option value="">Selecione...</option>
+                        <option value="Econômica" th:selected="${voo.classe == 'Econômica'}">Econômica</option>
+                        <option value="Executiva" th:selected="${voo.classe == 'Executiva'}">Executiva</option>
+                    </select>
+                </div>
+            </form>
+            
+            <form th:action="@{/selecionarPoltrona}" method="post">
+                <div class="botao" id="botao-poltrona">
+                    <div>Poltrona</div>
+                    <select class="dropdown-content" name="poltrona" onchange="this.form.submit()">
+                        <option value="">Selecione...</option>
+                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|A${i}|" th:text="|A${i}|" th:selected="${voo.poltrona == 'A' + i}"></option>
+                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|B${i}|" th:text="|B${i}|" th:selected="${voo.poltrona == 'B' + i}"></option>
+                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|C${i}|" th:text="|C${i}|" th:selected="${voo.poltrona == 'C' + i}"></option>
+                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|D${i}|" th:text="|D${i}|" th:selected="${voo.poltrona == 'D' + i}"></option>
+                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|E${i}|" th:text="|E${i}|" th:selected="${voo.poltrona == 'E' + i}"></option>
+                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|F${i}|" th:text="|F${i}|" th:selected="${voo.poltrona == 'F' + i}"></option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <div class="grupo">
+            <form th:action="@{/emitirPassagem}" method="post">
+                <button class="botao-redondo" type="submit" id="botao-emitir">
+                    <img th:src="@{/images/passagem-de-aviao.png}" alt="Emitir">
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
