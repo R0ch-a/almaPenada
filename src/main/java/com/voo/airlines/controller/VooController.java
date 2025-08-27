@@ -2,7 +2,8 @@ package com.voo.airlines.controller;
 
 import com.voo.airlines.model.Voo;
 import com.voo.airlines.service.VooService;
-import com.voo.airlines.model.Destino;
+import com.voo.airlines.model.VooEconomico;
+import com.voo.airlines.model.VooExecutivo;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,7 @@ public class VooController {
 
     @ModelAttribute("voo")
     public Voo setupVoo() {
-        return new Voo();
+        return new VooEconomico(); // Começa com um objeto padrão para a sessão
     }
 
     @GetMapping("/")
@@ -34,29 +35,41 @@ public class VooController {
     @PostMapping("/selecionarDestino")
     public String selecionarDestino(@ModelAttribute Voo voo, @RequestParam String siglaDestino) {
         voo.setDestino(vooService.getDestinoBySigla(siglaDestino));
-        System.out.println("Destino selecionado: " + voo.getDestino().getSigla());
         return "redirect:/";
     }
 
     @PostMapping("/selecionarData")
     public String selecionarData(@ModelAttribute Voo voo, @RequestParam String data) {
         voo.setData(data);
-        System.out.println("Data selecionada: " + voo.getData());
         return "redirect:/";
     }
 
     @PostMapping("/selecionarClasse")
-    public String selecionarClasse(@ModelAttribute Voo voo, @RequestParam String classe) {
-        voo.setClasse(classe);
-        voo.setPreco(vooService.calcularPreco(classe));
-        System.out.println("Classe selecionada: " + voo.getClasse() + " - Preço: R$" + voo.getPreco());
+    public String selecionarClasse(HttpSession session, @RequestParam String classe) {
+        Voo vooAtual = (Voo) session.getAttribute("voo");
+        Voo novoVoo;
+
+        if ("Executiva".equalsIgnoreCase(classe)) {
+            novoVoo = new VooExecutivo();
+        } else {
+            novoVoo = new VooEconomico();
+        }
+
+        // Copia os dados existentes para a nova instância
+        if (vooAtual != null) {
+            novoVoo.setOrigem(vooAtual.getOrigem());
+            novoVoo.setDestino(vooAtual.getDestino());
+            novoVoo.setData(vooAtual.getData());
+            novoVoo.setPoltrona(vooAtual.getPoltrona());
+        }
+
+        session.setAttribute("voo", novoVoo);
         return "redirect:/";
     }
 
     @PostMapping("/selecionarPoltrona")
     public String selecionarPoltrona(@ModelAttribute Voo voo, @RequestParam String poltrona) {
         voo.setPoltrona(poltrona);
-        System.out.println("Poltrona selecionada: " + voo.getPoltrona());
         return "redirect:/";
     }
 

@@ -21,9 +21,6 @@ public class VooService {
             "28/08/2025"
     );
 
-    private static final double PRECO_BASE = 500.0;
-    private static final double MULTIPLICADOR_EXECUTIVA = 1.5;
-
     public List<Destino> getDestinos() {
         return destinosFixos;
     }
@@ -37,12 +34,5 @@ public class VooService {
                 .filter(d -> d.getSigla().equals(sigla))
                 .findFirst()
                 .orElse(null);
-    }
-
-    public double calcularPreco(String classe) {
-        if ("Executiva".equalsIgnoreCase(classe)) {
-            return PRECO_BASE * MULTIPLICADOR_EXECUTIVA;
-        }
-        return PRECO_BASE;
     }
 }

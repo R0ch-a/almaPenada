@@ -1,31 +1,34 @@
 package com.voo.airlines.model;
 
-public class Voo {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+public abstract class Voo {
 
     private String origem;
     private Destino destino;
     private String data;
     private String horario;
     private String duracao;
-    private String classe;
     private String poltrona;
-    private double preco;
+    
+    // Construtor padrão (sem argumentos)
+    public Voo() {}
 
-    // Construtor padrão (sem argumentos) adicionado para o Spring Boot
-    public Voo() {
-    }
-
-    // Construtor completo
-    public Voo(String origem, Destino destino, String data, String horario, String duracao, String classe, String poltrona, double preco) {
+    // Construtor para inicialização de dados
+    public Voo(String origem, Destino destino, String data, String horario, String duracao, String poltrona) {
         this.origem = origem;
         this.destino = destino;
         this.data = data;
         this.horario = horario;
         this.duracao = duracao;
-        this.classe = classe;
         this.poltrona = poltrona;
-        this.preco = preco;
     }
+
+    // Método abstrato para calcular o preço, que será implementado pelas subclasses
+    public abstract double getPreco();
+    
+    // Método abstrato para obter o nome da classe, que será implementado pelas subclasses
+    public abstract String getClasse();
 
     // Getters e Setters
     public String getOrigem() { return origem; }
@@ -38,10 +41,6 @@ public class Voo {
     public void setHorario(String horario) { this.horario = horario; }
     public String getDuracao() { return duracao; }
     public void setDuracao(String duracao) { this.duracao = duracao; }
-    public String getClasse() { return classe; }
-    public void setClasse(String classe) { this.classe = classe; }
     public String getPoltrona() { return poltrona; }
     public void setPoltrona(String poltrona) { this.poltrona = poltrona; }
-    public double getPreco() { return preco; }
-    public void setPreco(double preco) { this.preco = preco; }
 }
