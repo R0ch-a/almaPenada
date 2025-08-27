@@ -27,7 +27,7 @@
                         <option value="">Selecione...</option>
                         <option th:each="destino : ${destinos}"
                                 th:value="${destino.sigla}"
-                                th:text="${destino.sigla}"
+                                th:text="${destino.cidade}"
                                 th:selected="${voo.destino != null and voo.destino.sigla == destino.sigla}">
                         </option>
                     </select>
