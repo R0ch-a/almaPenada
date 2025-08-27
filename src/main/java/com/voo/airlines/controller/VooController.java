@@ -1,9 +1,9 @@
 package com.voo.airlines.controller;
 
-import com.voo.airlines.model.*;
+import com.voo.airlines.model.Voo;
 import com.voo.airlines.service.VooService;
-import com.voo.airlines.model.VooEconomico;
-import com.voo.airlines.model.VooExecutivo;
+import com.voo.airlines.model.Destino;
+import com.voo.airlines.service.VooFactory;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +17,16 @@ import java.util.List;
 public class VooController {
 
     private final VooService vooService;
+    private final VooFactory vooFactory;
 
-    public VooController(VooService vooService) {
+    public VooController(VooService vooService, VooFactory vooFactory) {
         this.vooService = vooService;
+        this.vooFactory = vooFactory;
     }
 
     @ModelAttribute("voo")
     public Voo setupVoo() {
-        return new VooEconomico();
+        return vooFactory.criarVoo("Econômica");
     }
 
     @GetMapping("/")
@@ -51,13 +53,7 @@ public class VooController {
     @PostMapping("/selecionarClasse")
     public String selecionarClasse(HttpSession session, @RequestParam String classe) {
         Voo vooAtual = (Voo) session.getAttribute("voo");
-        Voo novoVoo;
-
-        if ("Executiva".equalsIgnoreCase(classe)) {
-            novoVoo = new VooExecutivo();
-        } else {
-            novoVoo = new VooEconomico();
-        }
+        Voo novoVoo = vooFactory.criarVoo(classe);
 
         if (vooAtual != null) {
             novoVoo.setOrigem(vooAtual.getOrigem());
@@ -80,7 +76,7 @@ public class VooController {
     public String emitirPassagem(@ModelAttribute Voo voo, Model model, SessionStatus sessionStatus) {
         voo.setOrigem("Aracaju");
         voo.setHorario("08:00");
-        vooService.salvarPassagem(voo); // Salva a passagem antes de redirecionar
+        vooService.salvarPassagem(voo);
         model.addAttribute("voo", voo);
         sessionStatus.setComplete();
         return "passagem-confirmacao";

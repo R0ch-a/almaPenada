@@ -1,4 +1,5 @@
 com\voo\airlines\model\Destino.class
+com\voo\airlines\service\VooFactory.class
 com\voo\airlines\model\VooEconomico.class
 com\voo\airlines\model\VooExecutivo.class
 com\voo\airlines\VooApplication.class
