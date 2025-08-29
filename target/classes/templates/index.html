@@ -65,12 +65,11 @@
                 <div class="botao" id="botao-poltrona">
                     <select class="dropdown-content" name="poltrona" onchange="this.form.submit()">
                         <option value="">Poltrona</option>
-                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|A${i}|" th:text="|A${i}|" th:selected="${voo.poltrona == 'A' + i}"></option>
-                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|B${i}|" th:text="|B${i}|" th:selected="${voo.poltrona == 'B' + i}"></option>
-                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|C${i}|" th:text="|C${i}|" th:selected="${voo.poltrona == 'C' + i}"></option>
-                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|D${i}|" th:text="|D${i}|" th:selected="${voo.poltrona == 'D' + i}"></option>
-                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|E${i}|" th:text="|E${i}|" th:selected="${voo.poltrona == 'E' + i}"></option>
-                        <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|F${i}|" th:text="|F${i}|" th:selected="${voo.poltrona == 'F' + i}"></option>
+                        <option th:each="poltrona : ${poltronas}"
+                                th:value="${poltrona}"
+                                th:text="${poltrona}"
+                                th:selected="${voo.poltrona == poltrona}">
+                        </option>
                     </select>
                 </div>
             </form>

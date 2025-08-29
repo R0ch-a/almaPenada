@@ -2,13 +2,12 @@ package com.voo.airlines.controller;
 
 import com.voo.airlines.model.Voo;
 import com.voo.airlines.service.VooService;
-//import com.voo.airlines.model.Destino;
 import com.voo.airlines.service.VooFactory;
-//import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
@@ -26,14 +25,14 @@ public class VooController {
 
     @ModelAttribute("voo")
     public Voo setupVoo() {
-        // Agora, a fábrica define a classe inicial do voo
         return vooFactory.criarVoo("Econômica");
     }
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @ModelAttribute Voo voo) {
         model.addAttribute("destinos", vooService.getDestinos());
         model.addAttribute("datas", vooService.getDatas());
+        model.addAttribute("poltronas", vooService.getPoltronasPorClasse(voo.getClasse()));
         List<Voo> passagensEmitidas = vooService.carregarPassagens();
         model.addAttribute("passagensEmitidas", passagensEmitidas);
         return "index";
@@ -52,10 +51,13 @@ public class VooController {
     }
 
     @PostMapping("/selecionarClasse")
-    public String selecionarClasse(@ModelAttribute("voo") Voo voo, @RequestParam String classe) {
-        // Ação simplificada: a lógica de criação de objetos está na fábrica
+    public String selecionarClasse(@ModelAttribute("voo") Voo vooAtual, @RequestParam String classe, HttpSession session) {
         Voo novoVoo = vooFactory.criarVoo(classe);
-        voo.setClasse(novoVoo.getClasse());
+        novoVoo.setOrigem(vooAtual.getOrigem());
+        novoVoo.setDestino(vooAtual.getDestino());
+        novoVoo.setData(vooAtual.getData());
+        novoVoo.setPoltrona(vooAtual.getPoltrona());
+        session.setAttribute("voo", novoVoo);
         return "redirect:/";
     }
 
@@ -67,27 +69,20 @@ public class VooController {
 
     @PostMapping("/emitirPassagem")
     public String emitirPassagem(@ModelAttribute Voo voo, Model model, SessionStatus sessionStatus) {
-        // Validação: verifica se todas as opções essenciais foram selecionadas
         if (voo.getDestino() == null || voo.getData() == null || voo.getPoltrona() == null) {
             model.addAttribute("error", "Por favor, selecione todas as opções para emitir a passagem.");
-            
-            // Adiciona as listas de destinos e datas ao modelo para a renderização da página
             model.addAttribute("destinos", vooService.getDestinos());
             model.addAttribute("datas", vooService.getDatas());
-            
-            // Retorna para a página inicial com a mensagem de erro
+            model.addAttribute("poltronas", vooService.getPoltronasPorClasse(voo.getClasse()));
             return "index";
         }
         
-        // Se a validação passar, continua com a lógica de negócio
         voo.setOrigem("Aracaju");
         voo.setHorario("08:00");
         vooService.salvarPassagem(voo);
         
-        // Finaliza a sessão da passagem
         sessionStatus.setComplete();
         
-        // Redireciona para a página de confirmação
         model.addAttribute("voo", voo);
         return "passagem-confirmacao";
     }

@@ -9,7 +9,6 @@ public abstract class Voo {
     private Destino destino;
     private String data;
     private String horario;
-    private String duracao;
     private String poltrona;
     private String classe;
 
@@ -20,7 +19,6 @@ public abstract class Voo {
         this.destino = destino;
         this.data = data;
         this.horario = horario;
-        this.duracao = duracao;
         this.poltrona = poltrona;
     }
 
@@ -37,8 +35,6 @@ public abstract class Voo {
     public void setData(String data) { this.data = data; }
     public String getHorario() { return horario; }
     public void setHorario(String horario) { this.horario = horario; }
-    public String getDuracao() { return duracao; }
-    public void setDuracao(String duracao) { this.duracao = duracao; }
     public String getPoltrona() { return poltrona; }
     public void setPoltrona(String poltrona) { this.poltrona = poltrona; }
     public String getClasse() { return classe; }
@@ -46,13 +42,7 @@ public abstract class Voo {
 
     @Override
     public String toString() {
-        return String.format("Código: %s, Origem: %s, Destino: %s, Data: %s, Poltrona: %s",
-                this.codigo != null ? this.codigo : "N/A",
-                this.origem != null ? this.origem : "N/A",
-                this.destino != null ? this.destino.getCidade() : "N/A",
-                this.data != null ? this.data : "N/A",
-                this.poltrona != null ? this.poltrona : "N/A",
-                this.classe != null ? this.classe : "N/A"
-        );
+        return String.format("Código: %s, Origem: %s, Destino: %s, Data: %s, Poltrona: %s, Classe: %s",
+                codigo, origem, destino.getCidade(), data, poltrona, classe);
     }
 }

@@ -1,2 +1,4 @@
-Código: E584, Origem: Aracaju, Destino: Rio de Janeiro, Data: 10/10/2025, Poltrona: B10
-Código: 836F, Origem: Aracaju, Destino: Recife, Data: 05/09/2025, Poltrona: C6
+Código: 0079, Origem: Aracaju, Destino: Rio de Janeiro, Data: 20/08/2025, Poltrona: A2
+Código: 2D6F, Origem: Aracaju, Destino: Recife, Data: 26/09/2025, Poltrona: W3
+Código: 9FB2, Origem: Aracaju, Destino: Recife, Data: 12/09/2025, Poltrona: E6, Classe: Econômica
+Código: D235, Origem: Aracaju, Destino: Rio de Janeiro, Data: 10/10/2025, Poltrona: W4, Classe: Executiva
