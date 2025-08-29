@@ -11,6 +11,7 @@ public abstract class Voo {
     private String horario;
     private String poltrona;
     private String classe;
+    private String portaoEmbarque;
 
     public Voo() {}
 
@@ -20,6 +21,7 @@ public abstract class Voo {
         this.data = data;
         this.horario = horario;
         this.poltrona = poltrona;
+
     }
 
     public abstract double getPreco();
@@ -39,10 +41,12 @@ public abstract class Voo {
     public void setPoltrona(String poltrona) { this.poltrona = poltrona; }
     public String getClasse() { return classe; }
     public void setClasse(String classe) { this.classe = classe; }
+    public String getPortaoEmbarque() { return portaoEmbarque; }
+    public void setPortaoEmbarque(String portaoEmbarque) { this.portaoEmbarque = portaoEmbarque; }
 
     @Override
     public String toString() {
-        return String.format("Código: %s, Origem: %s, Destino: %s, Data: %s, Poltrona: %s, Classe: %s",
-                codigo, origem, destino.getCidade(), data, poltrona, classe);
+        return String.format("Código: %s, Origem: %s, Destino: %s, Data: %s, Horário: %s, Portão de Embarque: %s, Poltrona: %s, Classe: %s",
+                codigo, origem, destino.getCidade(), data, horario, portaoEmbarque, poltrona, classe);
     }
 }

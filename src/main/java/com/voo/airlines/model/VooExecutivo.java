@@ -2,7 +2,7 @@ package com.voo.airlines.model;
 
 public class VooExecutivo extends Voo {
     
-    private static final double PRECO_BASE = 500.0;
+    private static final double PRECO_BASE = 2500.0;
     private static final double MULTIPLICADOR = 1.5;
 
     @Override

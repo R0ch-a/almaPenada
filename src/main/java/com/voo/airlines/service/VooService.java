@@ -18,9 +18,9 @@ import java.util.regex.Pattern;
 public class VooService {
 
     private final List<Destino> destinosFixos = Arrays.asList(
-            new Destino("Recife", "REC", "2h 30min"),
-            new Destino("Rio de Janeiro", "GIG", "1h 10min"),
-            new Destino("Curitiba", "CWB", "3h 20min")
+            new Destino("Recife", "REC", "2h 30min", "09:00"), // Horário adicionado
+            new Destino("Rio de Janeiro", "GIG", "1h 10min", "14:30"), // Horário adicionado
+            new Destino("Curitiba", "CWB", "3h 20min", "18:00") // Horário adicionado
     );
 
     private final List<String> datasFixas = Arrays.asList(
@@ -114,8 +114,8 @@ public class VooService {
         try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
-                // PADRÃO DE REGEX ATUALIZADO
-                Pattern padrao = Pattern.compile("Código: (.*?), Origem: (.*?), Destino: (.*?), Data: (.*?), Poltrona: (.*?), Classe: (.*)");
+                // PADRÃO DE REGEX ATUALIZADO para ler todas as informações
+                Pattern padrao = Pattern.compile("Código: (.*?), Origem: (.*?), Destino: (.*?), Data: (.*?), Horário: (.*?), Portão de Embarque: (.*?), Poltrona: (.*?), Classe: (.*)");
                 Matcher matcher = padrao.matcher(linha);
                 
                 if (matcher.matches()) {
@@ -123,8 +123,10 @@ public class VooService {
                     String origem = matcher.group(2);
                     String cidadeDestino = matcher.group(3);
                     String data = matcher.group(4);
-                    String poltrona = matcher.group(5);
-                    String classe = matcher.group(6);
+                    String horario = matcher.group(5);
+                    String portaoEmbarque = matcher.group(6);
+                    String poltrona = matcher.group(7);
+                    String classe = matcher.group(8);
                     
                     Voo voo;
                     if ("Executiva".equals(classe)) {
@@ -135,8 +137,10 @@ public class VooService {
 
                     voo.setCodigo(codigo);
                     voo.setOrigem(origem);
-                    voo.setDestino(new Destino(cidadeDestino, "", ""));
+                    voo.setDestino(new Destino(cidadeDestino, "", "", ""));
                     voo.setData(data);
+                    voo.setHorario(horario);
+                    voo.setPortaoEmbarque(portaoEmbarque);
                     voo.setPoltrona(poltrona);
                     voo.setClasse(classe);
                     passagens.add(voo);

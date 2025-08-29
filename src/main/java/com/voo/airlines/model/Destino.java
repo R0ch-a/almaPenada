@@ -4,15 +4,17 @@ public class Destino {
     private String cidade;
     private String sigla;
     private String duracao;
+    private String horario;
 
     // Construtor padrão necessário para o Jackson (biblioteca de JSON)
     public Destino() {
     }
 
-    public Destino(String cidade, String sigla, String duracao) {
+    public Destino(String cidade, String sigla, String duracao, String horario) {
         this.cidade = cidade;
         this.sigla = sigla;
         this.duracao = duracao;
+        this.horario = horario;
     }
 
     // Getters e Setters
@@ -33,5 +35,11 @@ public class Destino {
     }
     public void setDuracao(String duracao) {
         this.duracao = duracao;
+    }
+    public String getHorario() {
+        return horario;
+    }
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 }

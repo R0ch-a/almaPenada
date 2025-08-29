@@ -10,6 +10,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @SessionAttributes("voo")
@@ -77,8 +78,11 @@ public class VooController {
             return "index";
         }
         
+        // Adicionando o horário do destino e o portão de embarque
         voo.setOrigem("Aracaju");
-        voo.setHorario("08:00");
+        voo.setHorario(voo.getDestino().getHorario()); // Usa o horário do destino
+        voo.setPortaoEmbarque("B" + new Random().nextInt(10)); // Portão aleatório de B0 a B9
+        
         vooService.salvarPassagem(voo);
         
         sessionStatus.setComplete();
