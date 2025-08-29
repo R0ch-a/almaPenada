@@ -9,9 +9,4 @@ public class VooExecutivo extends Voo {
     public double getPreco() {
         return PRECO_BASE * MULTIPLICADOR;
     }
-    
-    @Override
-    public String getClasse() {
-        return "Executiva";
-    }
 }

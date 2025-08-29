@@ -8,9 +8,4 @@ public class VooEconomico extends Voo {
     public double getPreco() {
         return PRECO_BASE;
     }
-
-    @Override
-    public String getClasse() {
-        return "Econômica";
-    }
 }

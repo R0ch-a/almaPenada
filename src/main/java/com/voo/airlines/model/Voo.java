@@ -1,6 +1,6 @@
 package com.voo.airlines.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public abstract class Voo {
 
@@ -11,6 +11,7 @@ public abstract class Voo {
     private String horario;
     private String duracao;
     private String poltrona;
+    private String classe;
 
     public Voo() {}
 
@@ -24,7 +25,6 @@ public abstract class Voo {
     }
 
     public abstract double getPreco();
-    public abstract String getClasse();
     
     // Getters e Setters
     public String getCodigo() { return codigo; }
@@ -41,6 +41,8 @@ public abstract class Voo {
     public void setDuracao(String duracao) { this.duracao = duracao; }
     public String getPoltrona() { return poltrona; }
     public void setPoltrona(String poltrona) { this.poltrona = poltrona; }
+    public String getClasse() { return classe; }
+    public void setClasse(String classe) { this.classe = classe; }
 
     @Override
     public String toString() {
@@ -49,7 +51,8 @@ public abstract class Voo {
                 this.origem != null ? this.origem : "N/A",
                 this.destino != null ? this.destino.getCidade() : "N/A",
                 this.data != null ? this.data : "N/A",
-                this.poltrona != null ? this.poltrona : "N/A"
+                this.poltrona != null ? this.poltrona : "N/A",
+                this.classe != null ? this.classe : "N/A"
         );
     }
 }

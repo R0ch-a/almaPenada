@@ -2,9 +2,9 @@ package com.voo.airlines.controller;
 
 import com.voo.airlines.model.Voo;
 import com.voo.airlines.service.VooService;
-import com.voo.airlines.model.Destino;
+//import com.voo.airlines.model.Destino;
 import com.voo.airlines.service.VooFactory;
-import jakarta.servlet.http.HttpSession;
+//import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +26,7 @@ public class VooController {
 
     @ModelAttribute("voo")
     public Voo setupVoo() {
+        // Agora, a fábrica define a classe inicial do voo
         return vooFactory.criarVoo("Econômica");
     }
 
@@ -51,18 +52,10 @@ public class VooController {
     }
 
     @PostMapping("/selecionarClasse")
-    public String selecionarClasse(HttpSession session, @RequestParam String classe) {
-        Voo vooAtual = (Voo) session.getAttribute("voo");
+    public String selecionarClasse(@ModelAttribute("voo") Voo voo, @RequestParam String classe) {
+        // Ação simplificada: a lógica de criação de objetos está na fábrica
         Voo novoVoo = vooFactory.criarVoo(classe);
-
-        if (vooAtual != null) {
-            novoVoo.setOrigem(vooAtual.getOrigem());
-            novoVoo.setDestino(vooAtual.getDestino());
-            novoVoo.setData(vooAtual.getData());
-            novoVoo.setPoltrona(vooAtual.getPoltrona());
-        }
-
-        session.setAttribute("voo", novoVoo);
+        voo.setClasse(novoVoo.getClasse());
         return "redirect:/";
     }
 

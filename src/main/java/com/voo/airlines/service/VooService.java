@@ -3,7 +3,7 @@ package com.voo.airlines.service;
 import com.voo.airlines.model.Destino;
 import com.voo.airlines.model.Voo;
 import com.voo.airlines.model.VooEconomico;
-import com.voo.airlines.model.VooExecutivo;
+//import com.voo.airlines.model.VooExecutivo;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -26,7 +26,14 @@ public class VooService {
     private final List<String> datasFixas = Arrays.asList(
             "16/08/2025",
             "20/08/2025",
-            "28/08/2025"
+            "28/08/2025",
+            "05/09/2025",
+            "12/09/2025",
+            "19/09/2025",
+            "26/09/2025",
+            "03/10/2025",
+            "10/10/2025",
+            "17/10/2025"
     );
 
     private final String arquivoPassagensPath;

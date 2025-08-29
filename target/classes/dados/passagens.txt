@@ -1,2 +1,2 @@
-Código: E410, Origem: Aracaju, Destino: Recife, Data: 16/08/2025, Poltrona: A1
-Código: E743, Origem: Aracaju, Destino: Rio de Janeiro, Data: 28/08/2025, Poltrona: B3
+Código: E584, Origem: Aracaju, Destino: Rio de Janeiro, Data: 10/10/2025, Poltrona: B10
+Código: 836F, Origem: Aracaju, Destino: Recife, Data: 05/09/2025, Poltrona: C6
