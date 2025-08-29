@@ -13,7 +13,9 @@ public abstract class Voo {
     private String classe;
     private String portaoEmbarque;
 
-    public Voo() {}
+    public Voo(String classe) {
+        this.classe = classe;
+    }
 
     public Voo(String origem, Destino destino, String data, String horario, String duracao, String poltrona) {
         this.origem = origem;
@@ -24,7 +26,7 @@ public abstract class Voo {
 
     }
 
-    public abstract double getPreco();
+    public abstract double calcularPreco();
     
     // Getters e Setters
     public String getCodigo() { return codigo; }

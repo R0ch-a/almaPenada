@@ -1,3 +1,8 @@
 Código: DFBA, Origem: Aracaju, Destino: Recife, Data: 16/08/2025, Horário: 09:00, Portão de Embarque: B6, Poltrona: D1, Classe: Econômica
 Código: 226D, Origem: Aracaju, Destino: Rio de Janeiro, Data: 26/09/2025, Horário: 14:30, Portão de Embarque: B2, Poltrona: Z5, Classe: Executiva
 Código: 92AA, Origem: Aracaju, Destino: Curitiba, Data: 16/08/2025, Horário: 18:00, Portão de Embarque: B4, Poltrona: B7, Classe: Econômica
+Código: D4B8, Origem: Aracaju, Destino: Recife, Data: 16/08/2025, Horário: 09:00, Portão de Embarque: B1, Poltrona: B4, Classe: Econômica
+Código: EDF0, Origem: Aracaju, Destino: Rio de Janeiro, Data: 26/09/2025, Horário: 14:30, Portão de Embarque: B1, Poltrona: W1, Classe: Executiva
+Código: 0209, Origem: Aracaju, Destino: Rio de Janeiro, Data: 19/09/2025, Horário: 14:30, Portão de Embarque: B1, Poltrona: W2, Classe: Executiva
+Código: 3C79, Origem: Aracaju, Destino: Curitiba, Data: 19/09/2025, Horário: 18:00, Portão de Embarque: B1, Poltrona: W5, Classe: Executiva
+Código: 5701, Origem: Aracaju, Destino: Rio de Janeiro, Data: 28/08/2025, Horário: 14:30, Portão de Embarque: B7, Poltrona: Z4, Classe: Executiva

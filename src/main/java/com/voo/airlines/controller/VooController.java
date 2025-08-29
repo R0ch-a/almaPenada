@@ -77,16 +77,20 @@ public class VooController {
             model.addAttribute("poltronas", vooService.getPoltronasPorClasse(voo.getClasse()));
             return "index";
         }
-        
+    
         // Adicionando o horário do destino e o portão de embarque
         voo.setOrigem("Aracaju");
-        voo.setHorario(voo.getDestino().getHorario()); // Usa o horário do destino
-        voo.setPortaoEmbarque("B" + new Random().nextInt(10)); // Portão aleatório de B0 a B9
+        voo.setHorario(voo.getDestino().getHorario());
+        voo.setPortaoEmbarque("B" + new Random().nextInt(10));
         
+        // NOVO: Adicione o preço ao modelo
+        double precoFinal = voo.calcularPreco();
+        model.addAttribute("precoFinal", precoFinal);
+    
         vooService.salvarPassagem(voo);
-        
+    
         sessionStatus.setComplete();
-        
+    
         model.addAttribute("voo", voo);
         return "passagem-confirmacao";
     }

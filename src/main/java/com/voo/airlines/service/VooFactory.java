@@ -8,14 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class VooFactory {
     public Voo criarVoo(String classe) {
-        if ("Executiva".equalsIgnoreCase(classe)) {
-            VooExecutivo voo = new VooExecutivo();
-            voo.setClasse("Executiva");
-            return voo;
+        if ("Executiva".equals(classe)) {
+            return new VooExecutivo();
         } else {
-            VooEconomico voo = new VooEconomico();
-            voo.setClasse("Econômica");
-            return voo;
+            return new VooEconomico();
         }
     }
 }
