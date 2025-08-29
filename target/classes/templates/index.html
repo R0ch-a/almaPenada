@@ -7,10 +7,13 @@
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
+    <div th:if="${error}" class="error-message">
+        <p><span class="error-word">Erro</span>: Por favor, selecione todas as opções para emitir a passagem.</p>
+    </div>
     <header>
         <img th:src="@{/images/aviao.png}" class="aviao" alt="Avião">
         Trancy Airlines
-        <img th:src="@{/images/nuvem.png}" class="nuvens" alt="Nuvens">
+        <img th:src="@{/images/aviao2.png}" class="aviao2" alt="Avião">
     </header>
 
     <div class="container-botoes">
@@ -22,9 +25,8 @@
             
             <form th:action="@{/selecionarDestino}" method="post">
                 <div class="botao" id="botao-destino">
-                    <div>Destino</div>
                     <select class="dropdown-content" name="siglaDestino" onchange="this.form.submit()">
-                        <option value="">Selecione...</option>
+                        <option value="">Destino</option>
                         <option th:each="destino : ${destinos}"
                                 th:value="${destino.sigla}"
                                 th:text="${destino.cidade}"
@@ -38,9 +40,8 @@
         <div class="grupo">
             <form th:action="@{/selecionarData}" method="post">
                 <div class="botao" id="botao-data">
-                    <div>Data</div>
                     <select class="dropdown-content" name="data" onchange="this.form.submit()">
-                        <option value="">Selecione...</option>
+                        <option value="">Data</option>
                         <option th:each="data : ${datas}"
                                 th:value="${data}"
                                 th:text="${data}"
@@ -52,9 +53,8 @@
 
             <form th:action="@{/selecionarClasse}" method="post">
                 <div class="botao" id="botao-classe">
-                    <div>Classe</div>
                     <select class="dropdown-content" name="classe" onchange="this.form.submit()">
-                        <option value="">Selecione...</option>
+                        <option value="">Classe</option>
                         <option value="Econômica" th:selected="${voo.classe == 'Econômica'}">Econômica</option>
                         <option value="Executiva" th:selected="${voo.classe == 'Executiva'}">Executiva</option>
                     </select>
@@ -63,9 +63,8 @@
             
             <form th:action="@{/selecionarPoltrona}" method="post">
                 <div class="botao" id="botao-poltrona">
-                    <div>Poltrona</div>
                     <select class="dropdown-content" name="poltrona" onchange="this.form.submit()">
-                        <option value="">Selecione...</option>
+                        <option value="">Poltrona</option>
                         <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|A${i}|" th:text="|A${i}|" th:selected="${voo.poltrona == 'A' + i}"></option>
                         <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|B${i}|" th:text="|B${i}|" th:selected="${voo.poltrona == 'B' + i}"></option>
                         <option th:each="i : ${#numbers.sequence(1, 10)}" th:value="|C${i}|" th:text="|C${i}|" th:selected="${voo.poltrona == 'C' + i}"></option>

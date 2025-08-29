@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vOO - Trancy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="error-message">
+        <p><span class="error-word">Erro</span>: Por favor, selecione todas as opções para emitir a passagem.</p>
+    </div>
+    
+    <header>
+        <img src="images/aviao.png" class="aviao" alt="Avião">
+        Trancy Airlines
+        <img src="images/aviao2.png" class="aviao2" alt="Avião 2">
+    </header>
+
+    <div class="container-botoes">
+        <div class="grupo">
+            <div class="botao">
+                <div>Origem</div>
+                <div><strong>Aracaju</strong></div>
+            </div>
+            
+            <form action="#" method="post">
+                <div class="botao" id="botao-destino">
+                    <select class="dropdown-content" name="siglaDestino" onchange="this.form.submit()">
+                        <option value="">Destino</option>
+                        <option value="REC">Recife</option>
+                        <option value="GIG">Rio de Janeiro</option>
+                        <option value="CWB">Curitiba</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <div class="grupo">
+            <form action="#" method="post">
+                <div class="botao" id="botao-data">
+                    <select class="dropdown-content" name="data" onchange="this.form.submit()">
+                        <option value="">Data</option>
+                        <option value="16/08/2025">16/08/2025</option>
+                        <option value="20/08/2025">20/08/2025</option>
+                        <option value="28/08/2025">28/08/2025</option>
+                    </select>
+                </div>
+            </form>
+
+            <form action="#" method="post">
+                <div class="botao" id="botao-classe">
+                    <select class="dropdown-content" name="classe" onchange="this.form.submit()">
+                        <option value="">Classe</option>
+                        <option value="Econômica">Econômica</option>
+                        <option value="Executiva">Executiva</option>
+                    </select>
+                </div>
+            </form>
+            
+            <form action="#" method="post">
+                <div class="botao" id="botao-poltrona">
+                    <select class="dropdown-content" name="poltrona" onchange="this.form.submit()">
+                        <option value="">Poltrona</option>
+                        <option value="A1">A1</option>
+                        <option value="B2">B2</option>
+                        <option value="C3">C3</option>
+                        <option value="D4">D4</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <div class="grupo">
+            <form action="#" method="post">
+                <button class="botao-redondo" type="submit" id="botao-emitir">
+                    <img src="images/passagem-de-aviao.png" alt="Emitir">
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="carteira">
+        <h2>Minhas Passagens</h2>
+        <div class="lista-passagens">
+            <div class="passagem">
+                <p>Código: AB12, Origem: Aracaju, Destino: Rio de Janeiro, Data: 16/08/2025, Poltrona: A1</p>
+            </div>
+            <div class="passagem">
+                <p>Código: XY34, Origem: Aracaju, Destino: Curitiba, Data: 20/08/2025, Poltrona: B2</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
